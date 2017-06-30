@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		#plane{
+			position: absolute;
+			left:50%;
+			top:50%;
+			width:40px;
+			height:48px;
+			background: url("z5.png");
+		}
+		.bullet{
+			position: absolute;
+			left:10px;
+			top:10px;
+			width:3px;
+			height:17px;
+			background: url("eshot.png");
+		}
+	</style>
+</head>
+<body>
+	<h1>飞机大战</h1>
+	<hr>
+
+	<div id="plane"></div>
+
+	<div id="bullet1" class="bullet" style="display: none;"></div>
+	<div id="bullet2" class="bullet" style="display: none;"></div>
+	<div id="bullet3" class="bullet" style="display: none;"></div>
+	<div id="bullet4" class="bullet" style="display: none;"></div>
+	<div id="bullet5" class="bullet" style="display: none;"></div>
+	<div id="bullet6" class="bullet" style="display: none;"></div>
+
+	<script>
+		//获取飞机
+		var plane = document.getElementById("plane");
+
+		//绑定 键盘事件
+		document.onkeydown = function(ev){
+			var e = ev || window.event; //获取键盘事件对象
+			//判断所按按键
+			switch (e.keyCode) {
+				case 37: plane.style.left = Math.max(plane.offsetLeft - 5, 0) + "px";break; //向左移动
+				case 38: plane.style.top = Math.max(plane.offsetTop - 5,0) + "px";break; //向上移动
+				case 39: plane.style.left = Math.min(plane.offsetLeft + 5,window.innerWidth - 40) + "px";break; //向右移动 防止飞机超出页面 减去飞机的宽度 取最小值
+				case 40: plane.style.top = Math.min(plane.offsetTop + 5, window.innerHeight - 48) +"px";break; //向下移动
+				case 32: fire(plane.offsetLeft,plane.offsetTop);break;//调用fire函数 给实参 子弹的位置
+			}
+		}
+
+		/*
+         * 发射炮弹
+         * @param number 飞机的x坐标
+         * @param number 飞机的y坐标
+		*/
+
+		function fire(x,y){
+			for (var i = 1; i <=6; i ++) {
+				//获取子弹
+				var bullet = document.getElementById("bullet" + i);
+
+				//只有子弹是隐藏的才能发射
+				if (bullet.style.display === "none") {
+					//子弹显示
+					bullet.style.display = "block";
+
+					//子弹定位
+					bullet.style.left = (x+18.5) + 'px'; //飞机的一半宽度加上子弹的一般宽度
+					bullet.style.top = y + 'px';
+
+					return; //连续发射
+				}
+			}
+		}
+
+		/**
+         * 让子弹飞
+		*/
+
+		function run(){
+			for (var i = 1; i <=6; i ++){
+				//获取子弹
+				var bullet = document.getElementById("bullet"+i);
+
+				//如果子弹是显示的
+				if (bullet.style.display === "block") {
+					//改变bullet的位置
+					bullet.style.top = (bullet.offsetTop -10) + 'px';
+
+					//子弹回收
+					if (bullet.offsetTop <= 0){
+						bullet.style.display = "none";
+					}
+				}
+			}
+		}
+
+		setInterval(run, 10);//多次定时发射
+	</script>
+</body>
+</html>

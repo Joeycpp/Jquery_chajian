@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <title>电子时钟</title>
+ <style>
+	*{
+		margin: 0 auto;
+		padding-top:30px;
+
+	}
+	 #wrap{
+	   width: 300px;
+	   height: 100px;
+	   background-color: black;
+	}
+	 #time{
+	   color: #fff;
+	   display: block;
+	   font-size: 32px;
+	   margin-left: 80px;
+	   padding-top: 10px;
+	   text-align: center;
+	   width: 100px;
+	}
+	 #timer{
+	   color: #fff;
+	   display: block;
+	   font-size: 20px;
+	   margin: 0 auto;
+	   padding-top: 10px;
+	   text-align: center;	
+    }
+ </style>
+</head>
+<body>
+	<div id="wrap">
+	   <span id="time"></span>
+	   <span id="timer"></span>
+	</div>
+	 <script>
+	 var time =document.getElementById("time");
+	 var timer =document.getElementById("timer");
+	 
+	 setInterval(function() {
+		var date = new Date();
+		var hours = date.getHours();
+		var minutes = date.getMinutes();
+		var seconds = date.getSeconds(); 
+		var years = date.getYear();
+		var dates = date.getDate();
+		var monts = date.getMonth()+1; 
+		var day = date.getDay();
+		var parses = date.getMilliseconds();
+	 
+		 switch(day){
+			case 0:
+			day="日";break;
+			case 1:
+			day="一";break;
+			case 2:
+			day="二";break;
+			case 3:
+			day="三";break;
+			case 4:
+			day="四";break;
+			case 5:
+			day="五";break;
+			case 6:
+			day="六";break;
+		}
+		 //如果秒数小于十，在秒数面前连接一个0
+		 if(seconds < 10) {
+		  seconds = "0" + seconds;
+		 }
+		 //如果分钟数小于十，在分钟数面前连接一个0
+		 if(minutes < 10) {
+		  minutes = "0" + minutes;
+		 }
+		 //如果小时数小于十，在小说数面前连接一个0
+		 if(hours < 10) {
+		  hours = "0" + hours;
+		 }
+		 if(years<1900) {
+		  years = years+1900;
+		 }
+		 if(dates<10) {
+		  dates = "0" + dates;
+		 }
+		 if(monts<10) {
+		  monts = "0" + monts;
+		 }
+		 
+		timer.innerHTML = years +"年" +monts+ "月" +dates +"号"+"星期"+day;
+		time.innerHTML = hours + ":" + minutes + ":" + seconds + "";
+		 // date.getTime()//返回的是一个从1970年到当前的毫秒数（时间戳（ms）
+		 // date.getMonth()//返回的是月份，从0开始算
+		 // date.getFullYear();		  
+		 },10);
+	 </script>
+</body>
+</html>

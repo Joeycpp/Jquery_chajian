@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		ul{
+			list-style: none;
+			padding: 0;
+			margin:0;
+		}
+		.box{
+			width:800px;
+		}
+		.option{
+			border-bottom: 1px solid #ccc;
+			border-left: 1px solid #ccc;
+			line-height: 40px;
+			height: 40px;
+		}
+		.option li{
+			float: left;
+			padding: 0 20px;
+			font-size: 18px;
+			border-top: 1px solid #ccc;
+			border-right: 1px solid #ccc;
+			height:39px;
+			background-color: #f5f5f5;
+			cursor: pointer;
+		}
+		.option li.current{
+			background-color: #fff;
+			height: 40px;
+		}
+		.card{
+			border:1px solid #ccc;
+			border-top:none;
+			padding:20px;
+			height:400px;
+		}
+		.card ul{
+			position: relative;
+		}
+		.card li{
+			position: absolute;
+			left: 0;
+			right: 0;
+			opacity: 0;
+			filter:alpha(opacity=0);
+			transition: opacity .4s linear;
+		}
+		.card li.current{
+			opacity: 1;
+			filter: alpha(opacity=100);
+		}
+	</style>
+</head>
+<body>
+	<h1>选项卡</h1>
+	<hr>
+
+	<div class="box">
+		<div class="option">
+			<ul>
+				<li class="current">天龙八部</li>
+				<li>射雕英雄传</li>
+				<li>神雕侠侣</li>
+				<li>笑傲江湖</li>
+				<li>萧十一郎</li>
+			</ul>
+		</div>
+		<div class="card">
+			<ul>
+				<li class="current">故事讲述了面对乱世，萧峰、虚竹、段誉三人开始了非同寻常的热血江湖生涯，遇见了诸如无崖子、天山童姥、丁春秋、苏星河、慕容复、四大恶人等各色高手，生死情仇、爱恨别离、民族大义在因缘际会中施展等故事。</li>
+				<li>该书主要讲述了郭靖背负着家恨国仇闯入江湖，在红颜知己黄蓉的帮助下通过无数历程，最终成长为“侠之大者”的民族英雄的武林故事。</li>
+				<li>该剧主要讲述了南宋末年，杨过和小龙女经历了一番凄美爱情与江湖恩怨的故事。一样的故事，不一样的情节，力求展现一个可歌可泣的江湖往事。</li>
+				<li>该剧讲述华山派大弟子令狐冲，生性豁达不羁。偶遇剑宗高人风清扬授以《独孤九剑》，又意外尽得五岳各派剑法精髓，导致师父岳不群猜疑，藉口逐出师门。岳不群内里奸险非常，为独得《葵花宝典》，竟设计令武林各派自相残杀，唯最终作法自毙。而令狐冲最终则辗转练成吸星大法和易筋经，成为恒山派掌门的故事。</li>
+				<li>讲述了平常以济贫扶弱为志，过着潇洒浪荡的日子的侠盗萧十一郎在一次意外追逐中卷入了武林传说中人人窥伺神秘宝物之争，并因此结识了江湖第一美人沈璧君。沈璧君要嫁给武林世家公子连城璧，却因陪嫁物“割鹿刀”而引起了武林中人人争夺的一场腥风血雨</li>
+			</ul>
+		</div>
+	</div>
+
+	<!--[if gt IE 8]><!-->
+	<script src="dist/jquery-3.1.1.min.js"></script>
+	<!--<![endif]-->
+	<!--[if lte IE 8]>
+	<script src="dist/jquery-1.12.4.min.js"></script>	
+	<![endif]-->
+
+	<script>
+		$(".option li").click(function(){
+			$(this).addClass("current").siblings("li").removeClass("current");
+			$(".card li").eq($(this).index()).addClass("current").siblings("li").removeClass("current");
+		})
+	</script>
+</body>
+</html>
+

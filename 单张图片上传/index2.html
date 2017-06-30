@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>照片墙</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta content="yes" name="apple-mobile-web-app-capable" />
+    <meta content="black" name="apple-mobile-web-app-status-bar-style" />
+    <meta content="telephone=no" name="format-detection" />
+    <meta name="renderer" content="webkit">
+    <link rel="stylesheet" href="http://cdn.amazeui.org/amazeui/2.5.0/css/amazeui.min.css" />
+    <link rel="stylesheet" href="./css/mystyle.css" />
+</head>
+<body>
+<ul data-am-widget="gallery" class="am-gallery am-avg-sm-2
+  am-avg-md-3 am-avg-lg-4 am-gallery-overlay" data-am-gallery="{ pureview: true }" >
+    <li>
+        <div class="am-gallery-item">
+            <a href="images/1.jpg" class="">
+                <img src="images/1.jpg"  alt="远方 有一个地方 那里种有我们的梦想"/>
+                <h3 class="am-gallery-title">远方 有一个地方 那里种有我们的梦想</h3>
+                <div class="am-gallery-desc">2375-09-26</div>
+            </a>
+        </div>
+    </li>
+    <li>
+        <div class="am-gallery-item">
+            <a href="images/2.jpg" class="">
+                <img src="images/2.jpg"  alt="某天 也许会相遇 相遇在这个好地方"/>
+                <h3 class="am-gallery-title">某天 也许会相遇 相遇在这个好地方</h3>
+                <div class="am-gallery-desc">2375-09-26</div>
+            </a>
+        </div>
+    </li>
+    <li>
+        <div class="am-gallery-item">
+            <a href="images/3.jpg" class="">
+                <img src="images/3.jpg"  alt="不要太担心 只因为我相信"/>
+                <h3 class="am-gallery-title">不要太担心 只因为我相信</h3>
+                <div class="am-gallery-desc">2375-09-26</div>
+            </a>
+        </div>
+    </li>
+    <li>
+        <div class="am-gallery-item">
+            <a href="images/4.jpg" class="">
+                <img src="images/4.jpg"  alt="终会走过这条遥远的道路"/>
+                <h3 class="am-gallery-title">终会走过这条遥远的道路</h3>
+                <div class="am-gallery-desc">2375-09-26</div>
+            </a>
+        </div>
+    </li>
+</ul>
+<div class="fenye">
+    <ul class="am-pagination">
+      <li class="am-disabled"><a href="#">&laquo;</a></li>
+      <li class="am-active"><a href="#">1</a></li>
+      <li><a href="#">2</a></li>
+      <li><a href="#">3</a></li>
+      <li><a href="#">4</a></li>
+      <li><a href="#">&raquo;</a></li>
+    </ul>
+    <ul class="am-pagination">
+      <li><a href="">&laquo; 上一页</a></li>
+      <li><a href="">下一页 &raquo;</a></li>
+    </ul>
+    <a class="am-btn am-btn-danger submit1">去上传图片</a>
+</div>
+<!--遮罩层-->
+<div class="z_mask" id="z_mask">
+    <!--弹出框-->
+    <div class="z_alert">
+        <p>请输入密码？</p>
+        <p><input type="text" name="pwd" class="pwd"></p><div class="error">密码有误！</div>
+        <p>
+            <span class="z_cancel">取消</span>
+            <span class="z_sure">确定</span>
+        </p>
+    </div>
+</div>
+<script src="js/jquery.min.js"></script>
+<script src="js/amazeui.js"></script>
+<script >
+    $(".submit1").click(function(){
+        var index = $(this);
+        var t = index.parent().parent();
+        console.log(t);
+        $('#z_mask').show();
+        $(".z_cancel").click(function(){
+            $('#z_mask').hide();
+        })
+        $(".z_sure").click(function(){
+            var mypwd = $('.pwd').val();
+            if(!mypwd || mypwd != 123456){
+                $('.z_alert .error').css("display","block");
+                return false;
+            }else {
+                $('#z_mask').hide();
+                window.location.href="index.html";
+            }
+           
+            
+        })        
+    })     
+</script>
+</body>
+</html>

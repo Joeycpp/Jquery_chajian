@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		select,div{
+			float: left;
+			margin:40px;
+		}
+		select{
+			width:150px;
+			height:150px;
+		}
+		button{
+			background: #f5f5f5;
+			width:50px;
+			height:30px;
+			line-height:30px;
+			border:none;
+		}
+	</style>
+</head>
+<body>
+	<h1>select选择</h1>
+	<hr>
+
+	<select name="" id="left" multiple="">
+		<option value="1">a</option>
+		<option value="2">b</option>
+		<option value="3">c</option>
+		<option value="4">d</option>
+		<option value="5">e</option>
+		<option value="6">f</option>
+	</select>
+	<div>
+		<button onclick="toMove('left','right')"> >> </button>
+		<br><br>
+		<button onclick="toMove('right','left')"> << </button>
+	</div>
+
+	<select name="" id="right" multiple="">
+		<option value="1">1</option>
+		<option value="2">2</option>
+		<option value="3">3</option>
+		<option value="4">4</option>
+		<option value="5">5</option>
+		<option value="6">6</option>
+	</select>
+
+	<script>
+		//向右移动
+		function toMove(src,dist){
+			//获取select元素
+			var src_select = document.getElementById(src);
+			var dist_select = document.getElementById(dist);//src dist为形参 可让两个select相互选中添加
+		//遍历左边的
+			for(var i = 0;i < src_select.options.length; i ++) {
+				//判断是否被选中
+				if (src_select.options[i].selected) {
+					//添加到右边
+					dist_select.add(src_select.options[i]);
+					i --;
+				}
+
+			}
+		}
+	</script>
+</body>
+</html>

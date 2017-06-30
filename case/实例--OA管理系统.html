@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		ul{
+			margin:0px;
+			padding: 0px;
+			list-style: none;
+		}
+		h2{
+			margin:0px;
+			padding: 0px;
+		}
+		.nav{
+			width:200px;
+			border: 1px solid #ccc;
+		}
+		.nav h2{
+			padding: 0px 20px;
+			height:40px;
+			line-height: 40px;
+			font-size: 18px;
+			font-weight: normal;
+			-webkit-user-select:none;
+			background-color: #369;
+			border: 1px solid #ccc;
+			cursor: pointer;
+		}
+		.nav ul{
+			display: none;
+		}
+		.nav li {
+			border: 1px solid #ccc;
+			border-top: none;
+		}
+		.nav li a{
+			display: block;/*把a变为块状元素*/
+			padding: 0px 20px;
+			height: 38px;
+			line-height: 38px;
+			color:#333;
+			text-decoration: none;
+			background-color: #abcdef;
+		}
+	</style>
+</head>
+<body>
+	<h1>OA管理系统</h1>
+	<hr>
+
+	<div class="nav">
+		<h2>用户管理</h2>
+		<ul>
+			<li><a href="">查看用户</a></li>
+			<li><a href="">添加用户</a></li>
+			<li><a href="">编辑用户</a></li>
+			<li><a href="">删除用户</a></li>
+		</ul>
+		<h2>商品管理</h2>
+		<ul>
+			<li><a href="">查看商品</a></li>
+			<li><a href="">添加商品</a></li>
+			<li><a href="">编辑商品</a></li>
+			<li><a href="">删除商品</a></li>
+		</ul>
+		<h2>订单管理</h2>
+		<ul>
+			<li><a href="">查看订单</a></li>
+			<li><a href="">添加订单</a></li>
+			<li><a href="">编辑订单</a></li>
+			<li><a href="">删除订单</a></li>
+		</ul>
+		<h2>权限管理</h2>
+		<ul>
+			<li><a href="">查看权限</a></li>
+			<li><a href="">添加权限</a></li>
+			<li><a href="">编辑权限</a></li>
+			<li><a href="">删除权限</a></li>
+		</ul>
+		<h2>评价管理</h2>
+		<ul>
+			<li><a href="">查看评价</a></li>
+			<li><a href="">添加评价</a></li>
+			<li><a href="">编辑评价</a></li>
+			<li><a href="">删除评价</a></li>
+		</ul>
+	</div>
+
+	<script src="dist/jquery-1.12.4.min.js"></script>
+	
+	<script>
+		$(".nav h2").click(function(){
+			if ($(this).next("ul").is(":hidden")){
+				$(this).next("ul").slideDown();
+			} else{
+				$(this).next("ul").slideUp();
+			}
+		})
+	</script>
+
+</body>
+</html>

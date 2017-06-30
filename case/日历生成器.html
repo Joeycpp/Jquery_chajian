@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		#rili{
+			margin-top: 30px;
+		}
+		table{
+			width: 700px;
+			border-collapse: collapse;
+			table-layout: fixed;
+		}
+		td,th{
+			border:1px solid #ccc;
+			line-height: 30px;
+			height: 30px;
+			text-align: center;
+		}
+		th{
+			background: #f5f5f5;
+			line-height: 40px;
+			height:30px;
+		}
+		.box div{
+			margin-top: 10px;
+		}
+	</style>
+</head>
+<body>
+	<h1>日历生成器</h1>
+	<hr>
+
+	<div class="box">
+		<div>
+			<label for="">本月多少天：</label>
+			<input type="number" id="days" value="31" min="28" max="31">
+		</div>
+		<div>
+			<label for="">一号星期几：</label>
+			<input type="number" id="week" value="0" min="0" max="6">(星期日选择0)
+		</div>
+		<div>
+			<button onclick="makeDays()">生成日历</button>
+		</div>
+	</div>
+	
+	<div id="rili"></div>
+
+	<script>
+		function makeDays() {
+			//获取 总天数
+			var days = Number(document.getElementById("days").value);
+			//获取一号星期几
+			var week = Number(document.getElementById("week").value);
+
+			//字符串
+			var html = "<table>";
+			html += "<tr><th>星期日</th><th>星期一</th><th>星期二</th><th>星期三</th><th>星期四</th><th>星期五</th><th>星期六</th></tr>";
+
+			//计算 共多少行
+			var rows = (days + week) / 7;
+
+			//计数器
+			var day_number = 1; //规定几号
+			var content = "";
+			//循环
+			for (var i = 0; i < rows; i ++){
+				html += "<tr>";
+				for (var j = 0; j <= 6; j ++)  {
+					content = ""; //重新赋值为空
+					// 如果满足条件 content不为空
+					if ((j >= week || i > 0) && day_number <= days) {
+						content = day_number;
+						day_number ++;
+					} 
+
+					html += "<td>"+content+"</td>";
+				}
+				html += "</tr>";
+			}
+			html += "</table>";
+			//把字符串 输出到 #rili
+			document.getElementById("rili").innerHTML = html;
+		}
+	</script>
+</body>
+</html>

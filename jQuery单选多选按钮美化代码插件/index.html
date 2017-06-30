@@ -1,0 +1,39 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>jQuery单选多选按钮美化代码插件</title>
+
+<link href="css/ion.checkRadio.cloudy.css" rel="stylesheet" type="text/css">
+
+<script type="text/javascript" src="js/jquery-1.9.1.min.js"></script>
+<script src="js/ion.checkRadio.min.js"></script>
+
+</head>
+<body>
+<div class="zzsc">
+	单选按钮美化：
+	<div class="js-demo-1">
+		性别：
+		<label><input type="radio" name="radio" value="0" checked /> 男</label>
+		<label><input type="radio" name="radio" value="1" />女</label>
+		<label><input type="radio" name="radio" value="3" />保密</label>
+	</div>
+	多选按框美化：
+	<div class="js-demo-2">
+		兴趣爱好：
+		<label><input type="checkbox" name="checkbox" value="0" checked /> 交友聊天</label>
+		<label><input type="checkbox" name="checkbox" value="1" />网络游戏</label>
+		<label><input type="checkbox" name="checkbox" value="2" />程序编码</label>
+		<label><input type="checkbox" name="checkbox" value="3" />网上购物</label>
+	</div>
+
+	<script language="javascript">
+	$(".js-demo-1").find("input").ionCheckRadio();
+	$(".js-demo-2").find("input").ionCheckRadio();
+	</script>
+
+</div>
+
+</body>
+</html>

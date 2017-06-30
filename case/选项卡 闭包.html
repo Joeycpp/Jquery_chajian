@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		ul{
+			margin:0;
+			padding: 0;
+			list-style: none;
+		}
+		.box{
+			width:764px;
+		}
+		#options{
+			height:40px;/*ul的高40*/
+			line-height: 40px;
+			border-bottom: 1px solid #ccc;
+			border-left:1px solid #ccc;
+		}
+		#options li{
+			float: left;
+			padding:0px 30px;
+			height:39px;/*li的高39不能大于40不然底边框的线会没有了*/
+			background: #f5f5f5;
+			border-top:1px solid #ccc;
+			border-right:1px solid #ccc;
+			cursor:pointer;
+		}		
+		#options li.current{
+			height: 40px;/*高40，被选中的li高40可覆盖底边框*/
+			background: #fff;
+		}
+		#cards{
+			border:1px solid #ccc;
+			border-top:none;
+			padding: 20px;
+		}
+		#cards li{
+			display: none;
+			font-size: 32px;
+			min-height: 200px;
+		}
+		#cards li.current{
+			display: block;
+		}
+	</style>
+</head>
+<body>
+	<h1>选项卡</h1>
+	<hr>
+
+	<div class="box" id="box">
+		<ul id="options">
+			<li class="current" index="0">春天</li>
+			<li index="1">秋天</li>
+			<li index="2">夏天</li>
+			<li index="3">冬天</li>
+		</ul>
+		<ul id="cards">
+			<li class="current">我从春天走来</li>
+			<li>夏天知了哇哇叫</li>
+			<li>你在秋天说要分开</li>
+			<li>冬天里的第一场雪</li>
+			
+		</ul>
+	</div>
+	
+	<script>
+		//获取所有的选项li
+		var option_list = document.getElementById("options").getElementsByTagName('li');
+		//获取所有的卡li
+		var card_list = document.getElementById("cards").getElementsByTagName('li');
+
+		//给所有的选项绑定 单击事件
+		for (var i = 0; i < option_list.length; i ++){
+
+			(function(i){
+				option_list[i].onclick = function(){
+
+					//其他li的class去掉
+					for (var j = 0; j < option_list.length;j ++) {
+						option_list[j].className = "";
+						card_list[j].className = "";
+					}
+
+					//当前的li添加class
+					this.className = "current";
+					card_list[i].className = "current";
+				}
+			})(i)
+		}
+	</script>
+</body>
+</html>

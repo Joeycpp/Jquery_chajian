@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>JS电子表</title>
+	<style>
+		.iwatch{
+			margin:100px auto;
+			width:500px;
+			height: 100px;
+			background:purple;
+			color:#fff;
+			text-align: center;
+		}
+		.iwatch-date{
+			float:right;
+			margin-top: 20px;
+			width:200px;
+		}
+		.iwatch-date div{
+			font-size: 20px;
+		}
+		.iwatch-time{
+			float:left;
+			width:300px;
+			line-height: 100px;
+			font-size: 50px;
+		}
+		.iwatch-time span{
+			font-size:30px;
+		}
+	</style>
+</head>
+<body>
+<!-- 思路：先写一个div div里面包含两个div，一个代表时间 一个代表日期 然后在第一个div里面随便写个时间 方便设置样式 最后在第二个div里面再写两个div 一个代表星期几 一个代表年月日 都给上class和id-->
+	<div class="iwatch" id="iwatch">
+		<div class="iwatch-time" id="time">
+			08:30:30
+		</div>
+
+		<div class="iwatch-date">
+			<div class="week" id="week">星期三</div>
+			<div class="date" id="date">2016年08月12日</div>
+		</div>
+	</div>
+
+	<script>
+
+		//调用函数
+		runTime();
+		//① 首先定义定时函数
+		function runTime() {
+			var date = new Date(); //创建Date
+			getTime(date);//调用函数getTime
+			getDate(date);//调用函数getDate
+			getWeek(date);//date是个实参 对象
+			setTimeout(runTime,1000);//单次定时
+		}
+
+		//② 然后获取时间的函数
+		function getTime(date) {
+			var h = date.getHours();//获取小时
+			var m = date.getMinutes();//获取分钟
+			var s = date.getSeconds();//获取秒
+
+			//④ 处理一下时分秒，让其可以以01的形式显示 用三元运算符语句来判断 表达式？表达式1：表达式2 如果表达式成立返回表达式1 反之返回表达式2
+			h = (h < 10) ? "0"+h : h;
+			m = (m < 10) ? "0"+m : m;
+			s = (s < 10) ? "0"+s : s;
+
+			//⑤ 接下来拼接字符串
+			var time_str = h+":"+m+" <span>"+s+"</span>";
+
+			//⑥ 最后在页面输出内容
+			document.getElementById("time").innerHTML = time_str;
+		}
+
+		//获取日期
+		function getDate(date) {
+			var y = date.getFullYear();//获取年
+			var m = date.getMonth() + 1;//获取月
+			var d = date.getDate();//获取日
+
+			m = (m < 10) ? "0"+m : m;//处理月
+			d = (d < 10) ? "0"+d : d;//处理日
+
+			var date_str = y+"年"+m+"月"+d+"日"; //拼接日期字符串
+
+			document.getElementById("date").innerHTML = date_str;
+		}
+
+		//获取星期几
+		function getWeek(week) {
+			var w = week.getDay();//星期几
+
+			//处理 让数字变为汉字星期几
+			switch (w) {
+				case 0: var week = "日";break;
+				case 1: var week = "一";break;
+				case 2: var week = "二";break;
+				case 3: var week = "三";break;
+				case 4: var week = "四";break;
+				case 5: var week = "五";break;
+				case 6: var week = "六";break;
+			}
+
+			document.getElementById("week").innerHTML = "星期"+week;
+		}
+	</script>
+</body>
+</html>

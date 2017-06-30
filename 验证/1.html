@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>测试</title>
+	<script src="js/common.js"></script>
+	<link rel="stylesheet" href="./css/common_c.css">
+</head>
+<body>
+	<form>
+		<input type="text" class="mobile" name="mobile" value="" placeholder="请输入手机号">
+		<input type="text" class="name" name="name" value="" placeholder="请输入姓名">
+
+		<span class='submit'>提交 </span>
+	</form>
+	<section id="tips_shareWrap" class="shareWrap  tips_shareWrap" style="display: none">
+    <div class="share-popup " style="top: 0;left: 0; width: 100%; height: 100%; text-align: center; position: fixed; background-color: rgba(0, 0, 0, 0.8); z-index: 99;" >
+        <div class="por">
+            <div class="tipsWrap" style="width: 5rem;padding:.5rem;box-sizing:border-box;background: #fff;border-radius: .08rem;position: absolute;top:4.36rem;left:50%;margin-left:-2.5rem ;color:red;">
+                <p id="tipsWrap_txt" class="tipsWrap_txt" ></p>
+                <a href="javascript:;" class="tips_button" style="width: 1.5rem;height:.6rem;line-height: .6rem;display: block;background: #cb142e;color: #fff;border-radius: .05rem;margin: 0 auto;margin-top:.3rem" onclick="document.querySelector('.tips_shareWrap').style.display='none'">返回</a>
+            </div>
+        </div>
+    </div>
+</section>
+</body>
+<script src="http://apps.bdimg.com/libs/jquery/1.8.0/jquery.min.js"></script>
+<script>
+	function _systemmsg(msg, fn){
+	    var msgbox = $("#tips_shareWrap");
+	    msg && msg.length>0 && $('#tipsWrap_txt').html(msg);
+	    $('.fh').bind('click', function(){
+	      msgbox.hide();
+	      fn && fn();
+	    });
+	    msgbox.show();
+	}
+</script>
+<script>
+	$('.submit').click(function(){
+		var mobile = $('.mobile').val();
+		var name = $('.name').val();
+		console.log(mobile);
+		console.log(name);
+		if(!mobile){
+			_systemmsg('请输入手机号');
+			return false;
+		}
+		if(!/^1[3|5|7|8|][0-9]{9}$/.test(mobile)){
+				alert('手机号输入有误，请重新输入');
+				return false;
+		}
+
+	
+		//alert('可以提交了')
+
+	});
+
+
+	$(function(){$('.data-send').on('click', function(){
+		var vName = $('#input-name').val(),
+		vPhone = $('#input-phone').val(),
+		vAge = $('#input-age').val(),
+		vUrl = window.location.href;
+		$(this).attr("disabled", true);
+		if(vName == ''){
+			layer.open({
+				title: '警告',
+				content: '亲, 输入您的名字哈, 要不然不知道怎么称呼您呢',
+				scrollbar: false
+			});
+			$(this).attr("disabled", false);
+			return false;
+		}
+
+		if(vPhone.length > 10){
+			flag = vailPhone();
+		}else{
+			layer.open({
+				title: '警告',
+				content: '亲, 手机号位数不对呀, 您确定输入的是中国的号吗?',
+				scrollbar: false
+			});
+			$(this).attr("disabled", false);
+			return false;
+		}
+		responseUserin(vName, vPhone, vAge, vUrl);
+	});
+});
+
+function vailPhone(){
+	var phone = $("#input-phone").val();
+	var flag = false;
+	var message = "";
+	var myreg = /^(((13[0-9]{1})|(14[0-9]{1})|(17[0]{1})|(15[0-3]{1})|(15[5-9]{1})|(18[0-9]{1}))+\d{8})$/;       
+	if(phone == ''){
+		message = "手机号码不能为空！";
+	}else if(phone.length !=11){
+		message = "请输入有效的手机号码！";
+	}else if(!myreg.test(phone)){
+		message = "请输入有效的手机号码！";
+	}else{
+		flag = true;
+	}
+	if(!flag){
+		return message;
+	}else{
+		return false;
+	}
+}
+
+function responseUserin(s1, s2, s3, s4) {
+    $.ajax({
+        type: 'POST',
+		url: 'lib/ajaxtoinfomation.php',
+        dataType: 'json',
+        data: {
+            name: s1,
+            phone: s2,
+            age: s3,
+            vurl: s4
+        },
+        cache: false,
+        error: function(XMLHttpRequest, textStatus, errorThrown) {
+			layer.msg('囧, 太尴尬了, 不知道哪里出了点错误, 哎呀呀', {icon: 4});
+            return false;
+        },
+        success: function(json) {
+        	//屏蔽浏览器滚动条
+        	alert('您的信息已经提交成功, 我们会火速安排金牌顾问联系您, 请耐心等待');
+        	window.location.href = "index.html";
+        }
+    });
+}
+</script>
+
+</html>

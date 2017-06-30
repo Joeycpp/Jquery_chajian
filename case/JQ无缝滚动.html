@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		#box{
+			width:1000px;
+			height:200px;
+			border:1px solid #ccc;
+			overflow:hidden;
+		}
+		#content{
+			width:10000px;
+		}
+		#imglist{
+			float:left;
+		}
+		#box img{
+			float:left;
+			width:300px;
+			height:200px;
+		}
+	</style>
+</head>
+<body>
+	<h1>无缝滚动</h1>
+	<hr>
+
+	<div id="box">
+		<div id="content">
+			<div id="imglist">
+				<img src="images/1.jpg" alt="">
+				<img src="images/2.jpg" alt="">
+				<img src="images/3.jpg" alt="">
+				<img src="images/4.jpg" alt="">
+				<img src="images/5.jpg" alt="">
+				<img src="images/Meinv012.jpg" alt="">
+				<img src="images/Meinv007.jpg" alt="">
+				<img src="images/Meinv004.jpg" alt="">
+				<img src="images/Meinv005.jpg" alt="">
+				<img src="images/Meinv006.jpg" alt="">
+			</div>
+		</div>
+	</div>
+
+	
+	<!--[if gt IE 8]><!-->
+	<script src="dist/jquery-3.1.1.min.js"></script>
+	<!--<![endif]-->
+
+	<!--[if lte IE 8]>
+	<script src="dist/jquery-1.12.4.min.js"></script>
+	<![endif]-->
+
+	<script>
+		$("#imglist").clone().appendTo("#content");
+
+		setInterval(function(){
+			if ($("#box").scrollLeft() >= 3000) {
+				$("#box").scrollLeft(0);
+			}
+			$("#box").scrollLeft($("#box").scrollLeft()+10);
+		}, 100);
+	</script>
+</body>
+</html>

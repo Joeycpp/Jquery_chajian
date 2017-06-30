@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		table{
+			table-layout: fixed;
+			text-align: center;
+		}
+	</style>
+</head>
+<body>
+	<h1>Table 元素</h1>
+	<hr>
+
+	<table width="1000" border="1" cellspacing="0" cellpadding="5" id="tab">
+		<tr>
+			<th>序号</th>
+			<th>212房间</th>
+			<th>421房间</th>
+			<th>620房间</th>
+			<th>666房间</th>
+			<th>888房间</th>
+			<th>操作</th>
+		</tr>
+		<tr>
+			<td>1</td>
+			<td>标间</td>
+			<td>大床房</td>
+			<td>圆床套房</td>
+			<td>豪华套房</td>
+			<td>总统套房</td>
+			<td><button onclick="del(this)">删除</button></td>
+		</tr>
+
+		<tr>
+			<td>2</td>
+			<td>129￥</td>
+			<td>159￥</td>
+			<td>320￥</td>
+			<td>590￥</td>
+			<td>999￥</td>
+			<td><button onclick="del(this)">删除</button></td>
+		</tr>
+
+		<tr>
+			<td>3</td>
+			<td>两人入住</td>
+			<td>空</td>
+			<td>两人入住</td>
+			<td>空</td>
+			<td>一人入住</td>
+			<td><button onclick="del(this)">删除</button></td>
+		</tr>
+	</table>
+	<hr>
+
+	<form action="" name="myform" onsubmit="return addRow()">
+		212房间：<input type="text" name="room1" id=""><br><br>
+		421房间：<input type="text" name="room2" id=""><br><br>
+		620房间：<input type="text" name="room3" id=""><br><br>
+		666房间：<input type="text" name="room4" id=""><br><br>
+		888房间：<input type="text" name="room5" id=""><br><br>
+		<button>添加</button>
+	</form>
+	<hr>
+
+	<script>
+		var table = document.getElementById("tab");//获取table元素
+		function addRow(){
+			//获取表单中的数据
+			var room1 = document.myform.room1.value;
+			var room2 = document.myform.room2.value;
+			var room3 = document.myform.room3.value;
+			var room4 = document.myform.room4.value;
+			var room5 = document.myform.room5.value;
+			var index = table.rows.length;//求要添加的行的索引
+
+			var tr = table.insertRow(index);//插入tr
+
+			tr.insertCell(0).innerHTML = index;
+			tr.insertCell(1).innerHTML = room1;
+			tr.insertCell(2).innerHTML = room2;
+			tr.insertCell(3).innerHTML = room3;
+			tr.insertCell(4).innerHTML = room4;
+			tr.insertCell(5).innerHTML = room5;
+			tr.insertCell(6).innerHTML = '<td><button onclick="del(this)">删除</button></td>';
+			return false;
+		}
+
+		//删除一行的函数
+		function del(obj) {
+			table.deleteRow(obj.parentNode.parentNode.rowIndex)
+		}
+	</script>
+</body>
+</html>

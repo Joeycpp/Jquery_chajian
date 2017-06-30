@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		#res{
+			margin-top:30px;
+		}
+		table{
+			border-collapse: collapse;
+		}
+		td{
+			height:40px;
+		}
+		div{
+			margin-top: 10px;
+		}
+	</style>
+</head>
+<body>
+	<h1>table生成器</h1>
+	<hr>
+
+	<div>
+		行数：
+		<input type="text" name="" id="rows">
+	</div>
+
+	<div>
+		列数：
+		<input type="text" name="" id="columns">
+	</div>
+
+	<div>
+		宽度：
+		<input type="text" name="" id="width">
+	</div>
+
+	<div>
+		边框：
+		<input type="text" name="" id="border">
+	</div>
+
+	<div>
+		<button onclick="demo()">生成表格</button>
+	</div>
+
+	<div id="res"></div>
+
+	<script>
+		function demo() {
+			var rows_value = document.getElementById("rows").value;
+			var columns_value = document.getElementById("columns").value;
+			var width_value = document.getElementById("width").value;
+			var border_value =document.getElementById("border").value;
+
+			document.getElementById("res").innerHTML = printTable(rows_value, columns_value, width_value, border_value);
+		}
+
+		function printTable(rows,columns,width,border) {
+			if (rows === undefined) {
+				rows = 10;
+			}
+			if (columns === undefined) {
+				columns = 10;
+			}
+			if (width === undefined) {
+				width = 1000;
+			}
+			if (border === undefined) {
+				border =1;
+			}
+			// 生成table 的html
+			var html = "<table border='"+border+"' width='"+width+"'>";
+			for (var i = 0; i < rows; i ++) {
+				html += "<tr>";
+				for (var j = 0; j < columns; j ++) {
+					html += "<td></td>";
+				}
+				html += "</tr>"
+			}
+			html += "</table>";
+
+			//返回值
+			return html;
+		}
+	</script>
+</body>
+</html>

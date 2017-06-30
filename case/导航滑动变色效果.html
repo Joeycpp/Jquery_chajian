@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		ul{
+			margin:0;
+			padding:0;
+			width:600px;
+			list-style: none;
+		}
+		.item{
+			margin:5px;
+			padding:15px;
+			border:1px solid #ccc;
+			background-color: #f5f5f5;
+		}
+		.item.active{
+			background-color:red;
+		}
+	</style>
+</head>
+<body>
+	<h1>jQuery CSS类的操作</h1>
+	<hr>
+
+	<ul>
+		<li class="item">君不见黄河之水天上来</li>
+		<li class="item">君不见黄河之水天上来</li>
+		<li class="item">君不见黄河之水天上来</li>
+		<li class="item">君不见黄河之水天上来</li>
+		<li class="item">君不见黄河之水天上来</li>
+		<li class="item">君不见黄河之水天上来</li>
+		<li class="item">君不见黄河之水天上来</li>
+		
+	</ul>
+
+	<!--[if gt IE 8]><!-->
+	<script src="dist/jquery-3.1.1.min.js"></script>
+	<!--<![endif]-->
+
+	<!--[if lte IE 8]>
+	<script src="dist/jquery-1.12.4.min.js"></script>
+	<![endif]-->
+
+	<script>
+		$("ul li").mouseenter(function(){
+			//$(this).addClass("active");
+			$(this).toggleClass("active");
+		}).mouseleave(function(){
+			//$(this).removeClass("active");
+			$(this).toggleClass("active");
+		})
+		
+
+		/*$("ul li").hover(function(){
+			$(this).toggleClass("active");
+		});*/
+	</script>
+</body>
+</html>

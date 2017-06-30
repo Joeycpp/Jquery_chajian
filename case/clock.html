@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>转表</title>
+	<style>
+		.watch{
+			position: relative;
+			margin:100px auto;
+			width:600px;
+			height:600px;
+			background: url("./images/clock_logo.jpg") no-repeat;
+		}
+		.watch div {
+			position: absolute;
+			left:285px;
+			top:0px;
+			width:30px;
+			height:600px;
+		}
+		.hour{
+			background: url("./images/hour.png") no-repeat;
+		}
+		.minute{
+			background: url("./images/minute.png") no-repeat;
+		}
+		.second{
+			background:url("./images/second.png") no-repeat;
+		}
+		.watch audio{
+			display: none;
+		}
+	</style>
+</head>
+<body>
+	<div class="watch" id="watch">
+		<div class="hour" id="hour"></div>
+		<div class="minute" id="minute"></div>
+		<div class="second" id="second"></div>
+		<audio src="./images/clock.mp3" id="clock_audio"></audio>
+	</div>
+
+	<script>
+		//定时函数
+		function runTime() {
+			var date = new Date();//获取日期时间对象
+			var s = date.getSeconds();//获取当前的秒数
+			var m = date.getMinutes() + s/60;//获取当前的分钟数 因为是缓慢变化的所以加上s/60
+			var h = date.getHours() % 12 + m/60;//获取当前的小时 因为是12进制 所以小时数%12
+
+			//获取时针分针秒针的路径
+			document.getElementById("second").style.transform = "rotate(" + (s*6) + "deg)";
+			document.getElementById("minute").style.transform = "rotate(" + (m*6) + "deg)";
+			document.getElementById("hour").style.transform = "rotate(" + (h*30) + "deg)";
+
+			document.getElementById("clock_audio").play();//播放声音
+			setTimeout(runTime,1000);
+		}
+
+		//调用
+		runTime();
+	</script>
+</body>
+</html>

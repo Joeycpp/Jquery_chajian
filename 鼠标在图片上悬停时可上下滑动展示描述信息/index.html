@@ -1,0 +1,101 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>jquery实现的漂亮的图片可上下滑动展示信息效果</title>
+<style>
+*{
+	margin:0;
+	padding:0;
+	list-style-type:none;
+}
+a,img{border:0;
+}
+body{font:12px/180% Arial, Helvetica, sans-serif, "新宋体";}
+
+
+.main{
+	width:1000px;
+	height:333px;
+	margin:0 auto;
+	overflow:hidden;
+}
+.holder{
+	overflow:hidden;
+	width:320px;
+	height:333px;
+	float:left;
+	position:relative;
+	background-color:#000;
+	margin-right:1px;
+}
+.holder .image{
+	position:absolute;
+	left:-100px;
+}
+.holder span{
+	background-color:#333;
+	font-size:27px;
+	color:#dedede;
+	font-weight:700;
+	padding:4px;
+	position:absolute;
+	top:120px;
+	left:4px;
+}
+.holder .text{
+	padding:20px;
+	display:none;
+	line-height:26px;
+	position:absolute;
+	top:180px;
+	font-size:16px;
+	color:#fff;
+	width:340px;
+}
+</style>
+
+<script type="text/javascript" src="jquery-1.6.2.min.js"></script>
+<script type="text/javascript"> 
+$(document).ready(function(){
+	$('.holder').hover(function(){
+		$(this).removeClass('.notactive');	
+		$('.notactive').stop().animate({'width':'290px'},400); 
+		$(this).find('img').stop().animate({'top':'-165px'},400); 
+		$(this).stop().animate({'width':'380px'},400); 
+		$(this).find('span').css({'background-color':'#000'}); 
+		$(this).find('.text').fadeIn(300); 
+	},function(){
+		$('.notactive').stop().animate({'width':'320px'},400); 
+		$(this).addClass('.notactive');	
+		$(this).find('.text').hide();
+		$(this).find('img').stop().animate({'top':'0px'},500); 
+		$(this).stop().animate({'width':'320px'},400);
+		$(this).find('span').css({'background-color':'rgba(0,0,0,0.3)', 'color':'#dedede'}); 
+	});
+});
+</script>
+
+</head>
+<body>
+
+<div class="main">
+	<div class="holder notactive">
+		<img class="image" src="images/5.jpg"/>
+		<span>Amy(蜕变计划17班)</span>
+		<div class="text">很高兴来到易口说英语跟老师学习。经过这段时间的练习，我感觉自己的听力、拼读跟从前 有明显的提高，现在每天听读英语已成为一件快乐的事，原来学会另一种语言会这么奇妙，有趣。</div>
+	</div>
+	<div class="holder notactive">
+		<img class="image" src="images/4.jpg"/>
+		<span>Yoki(蜕变计划22班)</span>
+		<div class="text">在易口说上课学习快一个月，收获挺多的，希望自己能学以致用，很庆幸自己趁年轻时还可以多学习，希望蜕变22班的所有老师和同学一起走的更远，加油！</div>
+	</div>
+	<div class="holder notactive">
+		<img class="image" src="images/3.jpg"/>
+		<span>Amly(女神英语3班)</span>
+		<div class="text">在易口说学习已经顺利毕业，现在回头想想心 里还满怀感激，收获满满！很庆幸自己选择的 学校没有选错，  加入易口说，很幸运遇到Terry老师，再这样一个既负责又有耐心的老师的指导下，我的口语进步很大。</div>
+	</div>
+</div>
+
+</body>
+</html>

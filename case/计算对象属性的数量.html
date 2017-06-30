@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<h1>计算对象属性的数量</h1>
+	<hr>
+
+	<script>
+		var obj = {name:"杨洋",age:26,job:" a teacher",master:"夜神月",servitor:"死神",content:"死亡笔记",getInfo:function(){console.log('喜欢写谁的名字就写谁的')},coordinate:"冲绳"};
+
+			var j = 0;
+			for (var i in obj) {
+				j ++;
+
+			}
+			console.log(j);
+		
+	</script>
+</body>
+</html>

@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		table{
+			width:900px;
+			border-collapse: collapse;
+			table-layout: fixed;
+		}
+		td{
+			padding: 10px;
+			border:1px solid #ccc;
+		}
+		td.hide{
+			border:none;
+		}
+	</style>
+</head>
+<body>
+	<h1>九九乘法表</h1>
+	<hr>
+
+	<table>
+		<script>
+			var i = 1;
+			do{
+				document.write("<tr>");
+				var j = 1;
+				do{
+					document.write("<td>"+j+"x"+i+"="+(i*j)+"</td>");
+					j ++;
+				} while (j <=i);
+				document.write("</tr>");
+				i ++;
+			} while (i <=9)
+		</script>
+	</table>
+
+	<br>
+	<hr>
+	<br>
+
+	<table>
+		<script>
+			var i = 9;
+			do {
+				document.write("<tr>");
+				var j = 1;
+				do {
+					document.write("<td>"+j+"x"+i+"="+(i*j)+"</td>")
+					j ++;
+				} while (j<=i);
+				document.write("</tr>");
+				i --;
+			} while (i >=1);
+		</script>
+	</table>
+
+	<br>
+	<hr>
+	<br>
+
+	<table>
+		<script>
+			var i = 1;
+			do{
+				document.write("<tr>");
+				var a = 0;
+				do {
+					document.write("<td class='hide'></td>");
+					a ++;
+				} while (a <=9-i);
+				var j = 1;
+				do{
+					document.write("<td>"+j+"x"+i+"="+(i*j)+"</td>");
+					j ++;
+				} while(j <=i);
+				document.write("</tr>");
+				i ++;
+			} while (i <=9);
+		</script>
+	</table>
+
+	<br>
+	<hr>
+	<br>
+
+	<table>
+		<script>
+			var i = 9;
+			do{
+				document.write("<tr>");
+				var a = 1;
+				do {
+					document.write("<td class='hide'></td>");
+					a ++;
+				} while (a <=10-i);
+				var j = 1;
+				do{
+					document.write("<td>"+j+"x"+i+"="+(i*j)+"</td>");
+					j ++;
+				} while (j <=i);
+				document.write("</tr>");
+				i --;
+			} while (i>=1);
+		</script>
+	</table>
+</body>
+</html>

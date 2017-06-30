@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		table{
+			width:1000px;
+			border-collapse: collapse;
+			table-layout: fixed;
+		}
+		table td{
+			height:40px;
+			text-align: center;
+			border:1px solid #ccc;
+		}
+		
+	</style>
+</head>
+<body>
+	<h1>表格</h1>
+	<hr>
+	<table>
+		<script>
+			for (var i = 1; i<=8; i ++){
+				document.write("<tr>");
+				if (i%2 == 0){
+					document.write("<tr style=background:grey;>");
+				}
+					
+				for(var j = 0; j <5; j ++){
+					document.write("<td>"+"江南美景"+"</td>")
+				}
+				document.write("</tr>");
+				
+
+			}
+		</script>
+	</table>
+</body>
+</html>

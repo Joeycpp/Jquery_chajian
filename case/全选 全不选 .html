@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<h1>全选全不选反选</h1>
+	<hr>
+
+	<ul id="box">
+		<li><input type="checkbox" id="">皮城女警</li>
+		<li><input type="checkbox" id="">刀锋意志</li>
+		<li><input type="checkbox" id="">金克丝</li>
+		<li><input type="checkbox" id="">九尾妖狐</li>
+		<li><input type="checkbox" id="">疾风剑豪</li>
+		<li><input type="checkbox" id="">莫甘娜</li>
+		<li><input type="checkbox" id="">阿卡丽</li>
+	</ul>
+	<br>
+
+	<button onclick="select(1)">全选</button>
+	<button onclick="select(2)">全不选</button>
+
+	<script>
+		function select(m) {
+			var inputs = document.getElementById("box").getElementsByTagName('input');
+			
+			switch (m) {
+				case 1 : var checked_value = true;break;
+				case 2 : var checked_value = false;break;
+			}
+
+			for (var i = 0; i < inputs.length; i ++) {
+				inputs[i].checked = checked_value;
+			}
+		}
+	</script>
+
+</body>
+</html>

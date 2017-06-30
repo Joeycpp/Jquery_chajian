@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		.jsq div{
+			margin:10px;
+		}
+		.jsq button{
+		
+			margin-bottom:10px;
+		
+			margin-left: 10px;
+		}
+		p input{
+			margin-left: 10px;
+			width:300px;
+			height:150px;	
+		}
+	</style>
+</head>
+<body>
+	<h1>JavaScript加法计算器</h1>
+	<hr>
+	<div class="jsq">
+		<div>
+			<label for="">加数1：</label>
+			<input type="text" id="num1">
+		</div>
+		<div>
+			<label for="">加数2：</label>
+			<input type="text" id="num2">
+		</div>
+	
+		<button value="+" onclick="jisuan('+')">+</button>
+	
+	
+		<button value="-" onclick="jisuan('-')">-</button>
+		
+		
+		<button value="*" onclick="jisuan('*')">x</button>
+		
+		
+		<button value="÷" onclick="jisuan('÷')">÷</button>
+
+		<p><input type="text" id="result"></p>	
+	</div>
+	<script>
+		function jisuan(name) {
+			var num1 = parseFloat(document.getElementById("num1").value);
+			var num2 = parseFloat(document.getElementById("num2").value);
+
+			if(isNaN(num1)){
+				alert("加数1必须是数字！");
+				return;
+			}
+			if(isNaN(num2)){
+				alert("加数2必须是数字！");
+				return;
+			}
+
+			
+
+			var result = document.getElementById("result");
+			switch(name) {
+				case "+":result.value = num1 + num2;break;
+				case "-":result.value = num1 - num2;break;
+				case "*":result.value = num1 * num2;break;   
+            	case '÷':
+            	if ("0" == num2){
+            		 alert('除数不能为零！');
+                    return false;
+            	}
+            	result.value=num1/num2;
+                break; 
+			}   
+		}
+	</script>
+</body>
+</html>
+

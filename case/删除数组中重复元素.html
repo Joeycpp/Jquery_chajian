@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+		var a = [1,3,5,99,44,89,89,99,55,55,35,55,1,79,33,58,99,44,65,44,33];
+		var b = [];
+		var k = 0;
+		document.write("去除重复元素前的数组："+a + "<br>");
+
+        
+		function deleteElement(a,b,k){
+			for (var i = 0; i < a.length; i ++) {
+				for(var j = i+1; j < a.length; j++) {
+					if(a[i] == a[j]){
+						a.splice(j,1);
+						b[k] = a[i];
+					}
+				}
+				if(b[k]!== undefined){
+					k++;
+				}
+				
+			}
+			document.write("重复元素："+b +"<br>");
+			document.write("去除重复元素后的数组："+a +"<br>");	
+		}
+
+		deleteElement(a,b,k);
+	</script>
+</body>
+</html>

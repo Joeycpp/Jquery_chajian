@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<h1>把稀疏数组变为不稀疏数组</h1>
+	<hr>
+
+	<script>
+		var list = [1,3,5];
+		list[10]=10;
+		list[20]="小花";
+		document.write(list);
+		
+		document.write("<hr>");
+		
+		var arr = [];
+		for (var i in list) {
+			if(list[i] !== undefined){
+				arr [arr.length] = list[i];
+				//document.write(arr+"<br>");
+			}
+		}
+		document.write(arr+"<br>");
+
+		
+	</script>
+</body>
+</html>

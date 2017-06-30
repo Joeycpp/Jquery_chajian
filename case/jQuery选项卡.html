@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		ul{
+			margin:0;
+			padding: 0;
+			list-style: none;
+		}
+		.box{
+			width:764px;
+		}
+		#options{
+			height:40px;/*ul的高40*/
+			line-height: 40px;
+			border-bottom: 1px solid #ccc;
+			border-left:1px solid #ccc;
+		}
+		#options li{
+			float: left;
+			padding:0px 30px;
+			height:39px;/*li的高39不能大于40不然底边框的线会没有了*/
+			background: #f5f5f5;
+			border-top:1px solid #ccc;
+			border-right:1px solid #ccc;
+			cursor:pointer;
+		}		
+		#options li.current{
+			height: 40px;/*高40，被选中的li高40可覆盖底边框*/
+			background: #fff;
+		}
+		#cards{
+			border:1px solid #ccc;
+			border-top:none;
+			padding: 20px;
+		}
+		#cards li{
+			display: none;
+			font-size: 32px;
+			min-height: 200px;
+		}
+		#cards li.show{
+			display: block;
+		}
+	</style>
+</head>
+<body>
+	<h1>选项卡</h1>
+	<hr>
+
+	<div class="box" id="box">
+		<ul id="options">
+			<li class="current" >星期一</li>
+			<li >星期二</li>
+			<li >星期三</li>
+			<li >星期四</li>
+			<li>星期五</li>
+			<li>星期六</li>
+			<li>星期日</li>
+		</ul>
+		<ul id="cards" class="cards">
+			<li class="show">
+				星期一 选择go die
+			</li>
+			<li>星期二 日子过不下去了</li>
+			<li>星期三 日子看不到尽头了</li>
+			<li>星期四 心累累哒</li>
+			<li>星期五 满血复活</li>
+			<li>星期六 各种嗨</li>
+			<li>星期日 爱你 别走</li>
+		</ul>
+	</div>
+
+	<script src="dist/jquery-1.12.4.min.js"></script>
+	<script>
+		$(function(){
+			$("#options li").click(function(){
+				$(this).addClass("current").siblings().removeClass("current");
+				$(".cards li").eq($(this).index()).css("display","block").siblings().css("display","none");
+			})
+		})
+	</script>
+</body>
+</html>

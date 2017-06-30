@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+ 	<meta name="viewport" content="width=device-width, initial-scale=1">
+ 	<meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+    <meta content="telephone=no" name="format-detection">
+    <meta content="email=no" name="format-detection"> 	
+	<title>Document</title>
+	<style type="text/css" media="screen">
+		body,div,ul,li{
+			margin:0;
+			padding:0;
+		}
+		ul,li {
+			list-style:none;
+		}
+		body {
+			font-size:100%;
+			font-family:Helvetica,STHeiti,Droid Sans Fallback;
+		}
+		.mtabs {
+			margin:0;
+			padding:0;			
+			width:100%;
+			overflow:hidden;
+		}
+		.mhead {
+			height:38px;
+			border-top:2px solid #9ac7ed;
+			background:#ECF2F6;
+			-webkit-tap-highlight-color:rgba(0,0,0,0);
+		}
+		.mhead li {
+			position:relative;
+			font-size:1.125em;
+			text-align:center;
+			float:left;
+			width:69px;
+			height:38px;
+			line-height:38px;
+			color:#2a70be;
+		}
+		.mhead li.current {
+			border-top:2px solid #a80000;
+			margin-top:-2px;
+			background:#FFF;
+			color:#a80000;
+			height:38px;
+		}
+		.mcontent {
+			width:100%;
+			overflow:hidden;
+		}
+		.mcontent ul {
+			width:100%;
+			float:left;
+		}
+		.mcontent li {
+			height:35px;
+			line-height:35px;
+			font-size:1.125em;
+			padding:0 10px;
+		}
+		table{
+			width: 414px;
+			border-collapse: collapse;
+			border-spacing: 0px;
+		}
+		table td{
+			text-align: center;
+			border:1px solid #ccc;
+			padding: 10px;
+
+		}
+		table th{
+			padding: 10px;
+			border:1px solid #ccc;
+			border-top: none;
+		}
+	</style>	
+</head>
+<body>
+	<div class="mtabs" id="tabs">
+		<ul class="mhead">
+			<li>周一</li>
+			<li>周二</li>
+			<li>周三</li>
+			<li>周四</li>
+			<li>周五</li>
+			<li>周六</li>
+		</ul>
+		<div class="mcontent">
+			<ul>
+				<table>
+					<thead>
+						<tr>
+							<th>时间</th>
+							<th>课程</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>10:30~11:00</td>
+							<td>易纠音</td>
+						</tr>
+                        <tr>
+							<td>14:30~15:00</td>
+							<td>吉他哥教单词</td>
+						</tr>
+                        <tr>
+							<td>19:30~20:30</td>
+							<td>外教陪练课</td>
+						</tr>
+                        <tr>
+							<td>19:30~21:00</td>
+							<td>以班级群通知为准</td>
+						</tr>												
+					</tbody>
+				</table>							
+			</ul>
+			<ul>
+				<li>tab2内容内容内容内容</li>
+				<li>tab2内容内容内容内容</li>
+				
+			</ul>
+			<ul>
+				<li>tab3内容内容内容内容</li>
+				<li>tab3内容内容内容内容</li>
+				
+			</ul>
+			<ul>
+				<li>tab1内容内容内容内容</li>
+				<li>tab1内容内容内容内容</li>
+			</ul>
+			<ul>
+				<li>tab2内容内容内容内容</li>
+				<li>tab2内容内容内容内容</li>
+				
+			</ul>
+			<ul>
+				<li>tab3内容内容内容内容</li>
+				<li>tab3内容内容内容内容</li>
+				
+			</ul>			
+		</div>
+	</div><!-- End .mtabs -->
+</body>
+<script>
+	/**
+ * LBS mTabs
+ * Date: 2014-5-10
+ * ===================================================
+ * opts.mtab 	tabs外围容器/滑动事件对象(一个CSS选择器)
+ * opts.mhead 	tabs标题容器/点击对象(一个CSS选择器)
+ * opts.mcontent	tabs内容容器/滑动切换对象(一个CSS选择器) 
+ * opts.index 	tabs索引(默认0) 指定显示哪个索引的标题、内容
+ * opts.current  tabs当前项的类名(默认current)
+ * ===================================================
+**/
+(function(){
+window.mTabs = function(opts){
+	if(typeof opts === undefined) return;
+	//取得tabs外围容器、标题容器、内容容器
+	this.mtab = document.querySelector(opts.mtab);
+	this.mhead = document.querySelector(opts.mhead);
+	this.mcontent = document.querySelector(opts.mcontent);
+	//取得标题容器内选项集合、内容容器内容集合
+	this.mheads = this.mhead.children;
+	this.mcontents = this.mcontent.children;
+	this.length = this.mheads.length;
+	if(this.length < 1) return;
+	if(opts.index > this.length-1) opts.index = this.length-1;
+	this.index = this.oIndex = opts.index || 0;
+	this.current = opts.current || 'current'; //当前活动选项类名
+	this.touch = {};//自定义一个对象 用来保存手指触摸相关信息
+	this.init();
+}
+mTabs.prototype = {
+	init: function(opts){
+		this.set();
+		this.initset();
+		this.bind();
+	},
+	initset: function(){
+		for(var i = 0; i < this.length; i++){
+			this.mheads[i].index = i;//设置了一个属性 方便点击时判断是点了哪一项
+			this.mheads[i].className = this.mheads[i].className.replace(this.current,'');
+			this.mcontents[i].className = this.mcontents[i].className.replace(this.current,'');
+		}//初始化设置、先清空手动加在标题或内容HTML标签的当前类名（this.current）、再设置哪一项为当前选项并设置类名
+		this.mheads[this.index].className += ' '+this.current;
+		this.mcontents[this.index].className += ' '+this.current;
+		//对应的内容要显示在可视区域
+		//this.mcontent.style.webkitTransform = this.mcontent.style.transform = "translateX(" + (-this.index * this.width) + "px)";
+		//this.mcontent.style.webkitTransform = this.mcontent.style.transform = "translate3d(" + (-this.index * this.width) + "px,0,0)";
+	},
+	set: function(){//获取浏览器的视口宽度、并设置内容容器的宽度、每一项内容区域的宽度，屏幕旋转，浏览器窗口变换会再次设置这些值
+		this.width =  document.documentElement.clientWidth || document.body.clientWidth;
+		this.mcontent.style.width = this.length * this.width + 'px';		
+		for(var i = 0; i < this.length; i++) this.mcontents[i].style.width = this.width + 'px';//调整在可视区域显示的内容项
+		//this.mcontent.style.webkitTransform = this.mcontent.style.transform = "translateX(" + (-this.index * this.width) + "px)";
+		this.mcontent.style.webkitTransform = this.mcontent.style.transform = "translate3d(" + (-this.index * this.width) + "px,0,0)";
+	},
+	bind: function(){
+	    //绑定各种事件
+		var _this = this;
+		this.mtab.addEventListener("touchstart",function(e){
+			_this.touchStart(e);
+		}, false);
+		this.mtab.addEventListener("touchmove",function(e){
+			_this.touchMove(e);
+		}, false);
+		this.mtab.addEventListener("touchend",function(e){
+			_this.touchEnd(e);
+		}, false);
+		this.mtab.addEventListener("touchcancel",function(e){
+			_this.touchEnd(e);
+		}, false);
+		this.mhead.addEventListener("click",function(e){
+			_this.touchClick(e);
+		}, false);
+		this.mcontent.addEventListener('webkitTransitionEnd',function(){
+			_this.transitionEnd();
+		}, false);
+		window.addEventListener("resize", function(){
+			setTimeout(function(){
+				_this.set();
+			},100);
+		}, false);
+		window.addEventListener("orientationchange",function(){
+			setTimeout(function(){
+				_this.set();
+			},100);
+		}, false);
+	},
+	touchStart: function(e){
+		this.touch.x = e.touches[0].pageX;
+		this.touch.y = e.touches[0].pageY;
+		this.touch.time = Date.now();
+		this.touch.disX = 0;
+		this.touch.disY = 0;
+		this.touch.fixed = ''; //重要 这里采用了判断是滚动页面行为、还是切换选项行为 如果是滚动页面就在滑动时只滚动页面 相应的切换选项就切换不会滚动页面 
+	},
+	touchMove: function(e){
+		if(this.touch.fixed === 'up') return;
+		e.stopPropagation();
+		if(e.touches.length > 1 || e.scale && e.scale !== 1) return;
+		this.touch.disX = e.touches[0].pageX - this.touch.x;
+		this.touch.disY = e.touches[0].pageY - this.touch.y;
+		if(this.touch.fixed === ''){//行为判断 采用这种方式 主要解决手指按下移动(左上、右上)时滑动切换和滚动页面同时执行的问题  
+			if( Math.abs(this.touch.disY) > Math.abs(this.touch.disX) ){
+				this.touch.fixed = 'up';
+			}else{
+				this.touch.fixed = 'left';
+			}
+		}
+		if(this.touch.fixed === 'left'){
+			e.preventDefault();
+			if( (this.index === 0 && this.touch.disX > 0) || (this.index === this.length-1 && this.touch.disX < 0) ) this.touch.disX /= 4; //在 第一项向右滑动、最后一项向左滑动 时
+			//this.mcontent.style.webkitTransform = this.mcontent.style.transform = "translateX(" + ( this.touch.disX - this.index * this.width ) + "px)";
+			this.mcontent.style.webkitTransform = this.mcontent.style.transform = "translate3d(" + ( this.touch.disX - this.index * this.width ) + "px,0,0)";
+		} 
+	},
+	touchEnd: function(e){	
+		if(this.touch.fixed === 'left'){
+			var _this = this, X = Math.abs(this.touch.disX);
+			this.mcontent.style.webkitTransition = this.mcontent.style.transition = 'all 100ms';
+			if( (Date.now() - this.touch.time > 100 && X > 10) || X > this.width/2 ){
+				this.touch.time = Date.now();
+				this.touch.disX > 0 ? this.index-- : this.index++;
+				this.index < 0 && (this.index = 0);
+				this.index > this.length - 1 && (this.index = this.length - 1);
+				if(this.index === this.oIndex) this.mcontent.style.webkitTransition = this.mcontent.style.transition = 'all 300ms';
+				if(this.index !== this.oIndex) this.replace();
+			}
+			//this.mcontent.style.webkitTransform = this.mcontent.style.transform = "translateX(" + (-this.index * this.width) + "px)";
+			this.mcontent.style.webkitTransform = this.mcontent.style.transform = "translate3d(" + (-this.index * this.width) + "px,0,0)";
+		}	
+	},
+	transitionEnd: function(){
+		this.mcontent.style.webkitTransition = this.mcontent.style.transition = 'all 0ms';
+	},
+	touchClick: function(e){
+		var target = e.target;
+		if(target.nodeType === 1 && target.index !== undefined){
+			if(target.index === this.index) return;
+			e.preventDefault();
+			e.stopPropagation();
+			this.index = target.index;
+			this.mcontent.style.webkitTransition = this.mcontent.style.transition = 'all 100ms';
+			//this.mcontent.style.webkitTransform = this.mcontent.style.transform = "translateX(" + (-this.index * this.width) + "px)";
+			this.mcontent.style.webkitTransform = this.mcontent.style.transform = "translate3d(" + (-this.index * this.width) + "px,0,0)";
+			this.replace();
+		}
+	},
+	replace: function(){
+		this.mheads[this.index].className += ' '+this.current;
+		this.mheads[this.oIndex].className = this.mheads[this.oIndex].className.replace(this.current,'').trim();
+		this.mcontents[this.index].className += ' '+this.current;
+		this.mcontents[this.oIndex].className = this.mcontents[this.oIndex].className.replace(this.current,'').trim();
+		this.oIndex = this.index;
+	}
+}
+}())
+
+document.addEventListener('DOMContentLoaded',function(){
+	//use mTabs
+	new mTabs({
+		mtab: '#tabs',
+		mhead: '#tabs .mhead',
+		mcontent: '#tabs .mcontent'
+	});
+
+	/*new mTabs({
+		mtab: '#tabs',
+		mhead: '#tabs .mhead',
+		mcontent: '#tabs .mcontent',
+		index: 1,
+		current: 'active'
+	});*/
+
+},false);
+</script>
+</html>

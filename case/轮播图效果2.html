@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		ul{
+			list-style: none;
+			padding:0;
+			margin:0;
+		}
+		#play_box{
+			position: relative;
+			width:670px;
+			height: 240px;
+			
+		}
+		#play_box img{
+			opacity: 0;
+			height:0;
+			transition: all linear 0.5s;
+
+		}
+		#play_box img.current{
+			opacity: 1;
+			height:auto;
+		}
+		#iconlist{
+			position: absolute;
+			bottom: 10px;
+			right: 20px;
+		}
+		#iconlist li{
+			float: left;
+			margin-left: 5px;
+			width: 26px;
+			height:26px;
+			color:#fff;
+			text-align: center;
+			line-height: 26px;
+			background: #999;
+			border-radius: 13px;
+			cursor: pointer;
+		}
+
+		#iconlist li.current{
+			background: red;
+		}
+	</style>
+</head>
+<body>
+	<h1>轮播图</h1>
+	<hr>
+	<div id="play_box">
+		<div class="imagelist">
+			<img src="image/1.jpg" alt="" class="current">
+			<img src="image/2.jpg" alt="">
+			<img src="image/4.jpg" alt="">
+			<img src="image/5.jpg" alt="">
+			<img src="image/6.jpg" alt="">
+		</div>
+		<div id="iconlist">
+			<ul>
+				<li class="current">1
+				</li>
+				<li>2</li>
+				<li>3</li>
+				<li>4</li>
+				<li>5</li>
+			</ul>
+		</div>
+	</div>
+
+	<script>
+		//获取所有图片的集合
+		var play_box = document.getElementById("play_box");
+		var images = play_box.getElementsByTagName('img');
+		var iconlist = play_box.getElementsByTagName("li");
+
+		var m = 1;//定义循环变量
+
+		var timer = setInterval(run,3000);
+		//循环函数
+		function run(){
+			if (m > 4) {
+				m = 0;
+			}
+			//控制图片变化
+			controlImage(m);
+			//控制按钮变化
+			controlIcon(m);
+			m ++;
+		}
+
+		//定义函数 控制图片的变化
+		function controlImage(n) {
+			//所有的图片隐藏第n个图片显示
+			for (var i = 0; i < images.length; i ++){
+				images[i].className = "";
+			}
+			images[n].className = "current";
+		}
+
+		//定义函数 控制按钮变化
+		function controlIcon(n){
+			//所有的按钮变灰第n个变红
+			for (var i = 0; i < iconlist.length; i++) {
+				iconlist[i].className = "";
+			}
+			iconlist[n].className = "current";
+		}
+
+		//鼠标滑过定时停止
+		play_box.onmouseover = function(){
+			clearInterval(timer);
+		}
+
+		//鼠标移走 继续定时
+		play_box.onmouseout = function(){
+			timer = setInterval(run,3000);
+		}
+
+		//给按钮绑定 鼠标滑过事件
+		for (var i = 0; i < iconlist.length; i ++) {
+			(function(i){
+				iconlist[i].onmouseover = function(){
+					controlIcon(i);
+					controlImage(i);
+					m = i + 1;
+				}
+			})(i)
+		}
+	</script>
+</body>
+</html>
+

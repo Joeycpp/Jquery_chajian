@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		button{
+			margin:10px;
+			width:100px;
+			height: 40px;
+		}
+	</style>
+</head>
+<body>
+	<div>
+		<img src="avatar.jpg" alt="" id="image">
+	</div>
+	<button onclick="changeBig()">变大</button>
+	<button onclick="changeSmall()">变小</button>
+
+	<script>
+		//获取img
+		var img = document.getElementById("image");
+		function changeBig() {
+			img.width +=100;
+			img.height +=100;
+		}
+		function changeSmall() {
+			image.width -=50;
+			image.height -=50;
+		}
+	</script>
+</body>
+</html>

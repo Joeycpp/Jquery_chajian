@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		#box input{
+			margin:20px;
+		}
+		#box1{
+			margin-left: 20px;
+		}
+		#box1 input{
+			margin:20px;
+			margin-left: 20px;
+		}
+	</style>
+</head>
+<body>
+	<h1>选择喜欢的明星</h1>
+	<hr>
+	<div id="box">
+		<input type="checkbox" name="1" id="" onclick="sel()">杨洋
+		<input type="checkbox" name="1" id="" onclick="sel()">胡歌
+		<input type="checkbox" name="1" id="" onclick="sel()">霍建华
+		<input type="checkbox" name="1" id="" onclick="sel()">赵丽颖
+		<input type="checkbox" name="1" id="" onclick="sel()">林心如
+		<input type="checkbox" name="1" id="" onclick="sel()">郑爽
+		<input type="checkbox" name="1" id="" onclick="sel()">邓超
+		<input type="checkbox" name="1" id="" onclick="sel()">Angel Baby
+	</div>
+	<div id="box1">
+		全选：<input type="checkbox" id="all" onclick="selectAll()">
+		
+	</div>
+	<script>
+		//全选
+
+		var inputs =document.getElementsByName('1');
+		function selectAll() {
+			
+			for(var i in inputs){
+					inputs[i].checked  = all.checked;
+			}
+		}
+
+
+		 function sel() {  
+                 
+                var myinput = document.getElementsByName("1");  
+                  
+                var number = 0;  
+                for (var i=0; i < myinput.length; i++) {  
+                    if(myinput[i].checked == true) {  
+                        number ++;  
+                    }  
+                }                 
+                  
+                if(number == myinput.length) {  
+                    all.checked = true;  
+                }else {  
+                    all.checked = false;  
+                }  
+            }  
+              
+		
+	</script>
+</body>
+</html>

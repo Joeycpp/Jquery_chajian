@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		div input{
+			margin:20px;
+		}
+		button{
+			margin:20px;
+		}
+	</style>
+</head>
+<body>
+	<h1>选择喜欢的明星</h1>
+	<hr>
+	<div id="box">
+		<input type="checkbox" name="" id="">杨洋
+		<input type="checkbox" name="" id="">胡歌
+		<input type="checkbox" name="" id="">霍建华
+		<input type="checkbox" name="" id="">赵丽颖
+		<input type="checkbox" name="" id="">林心如
+		<input type="checkbox" name="" id="">郑爽
+		<input type="checkbox" name="" id="">邓超
+		<input type="checkbox" name="" id="">Angel Baby
+	</div>
+	<button onclick="selectAll()">全选</button>
+	<button onclick="selectNone()">全不选</button>
+	<button onclick="unSelect()">反选</button>
+
+	<script>
+		//全选
+		var inputs =document.getElementsByTagName('input');
+		function selectAll() {
+			
+			for(var i in inputs){
+					inputs[i].checked = true;
+				}
+			}
+
+		//全不选
+		function selectNone() {
+			
+			for (var i in inputs){
+				inputs[i].checked = false;
+			}
+		}
+
+		//反选
+		
+		function unSelect() {
+			
+			for (var i in inputs){
+				if (inputs[i].checked == false){
+					inputs[i].checked = true;
+				} else  
+			 {inputs[i].checked = false;}
+			}
+		}
+	</script>
+</body>
+</html>

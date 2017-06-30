@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		#zoom{
+			position: relative;
+			width:384px;
+			height: 216px;
+			cursor: crosshair;
+		}
+		#big_zoom{
+			display: none;
+			overflow: hidden;
+			position: absolute;
+			width: 400px;
+			height: 400px;
+			border:1px solid #ccc;
+		}
+		#drap_zoom{
+			display: none;
+			position: absolute;
+			left: 0px;
+			top: 0px;
+			width:80px;
+			height: 80px;
+			background: pink;
+			opacity: 0.5;
+		}
+	</style>
+</head>
+<body>
+	<h1>放大镜</h1>
+	<hr>
+
+	<div id="zoom">
+		<img src="Meinv007.jpg" alt="" width="384" height="216">
+		<div id="drap_zoom"></div>
+	</div>
+
+	<div id="big_zoom">
+		<img src="Meinv007.jpg" alt="">
+	</div>
+
+	<script>
+		//获取元素
+		var zoom = document.getElementById("zoom");
+		var big_zoom = document.getElementById("big_zoom");
+		var drap_zoom = document.getElementById("drap_zoom");
+
+		//绑定事件 鼠标滑上去大图片出现
+		zoom.onmouseover = function(){
+			//大图显示
+			big_zoom.style.display = "block";
+
+			//改变大图位置
+			big_zoom.style.left = zoom.getBoundingClientRect().right + 10 + "px";
+			big_zoom.style.top = zoom.getBoundingClientRect().top + "px";
+
+			//鼠标移动事件
+			this.onmousemove = function(en){
+				//获取event对象
+				var e = en || window.event;
+				//计算鼠标在zoom上的坐标
+				var x = e.clientX - zoom.getBoundingClientRect().left;
+				var y = e.clientY - zoom.getBoundingClientRect().top;
+
+				//拖动层显示
+				drap_zoom.style.display = "block";
+				//计算拖动层的位置
+				var left = Math.min(Math.max(x - 40,0),304);
+				var top = Math.min(Math.max(y - 40,0),136);
+				//控制拖动层位置
+				drap_zoom.style.left = left + 'px';
+				drap_zoom.style.top = top + 'px';
+
+				//控制大图滚动
+				big_zoom.scrollLeft = left * 5;
+				big_zoom.scrollTop = top * 5
+			}
+		}
+
+		//鼠标移走
+		zoom.onmouseout = function(){
+			big_zoom.style.display = "none";//大图隐藏
+			drap_zoom.style.display = "none";
+		}
+	</script>
+</body>
+</html>

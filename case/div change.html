@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		#box{
+			width:300px;
+			height:300px;
+			border:1px solid #ccc;
+		}
+		button{
+			margin:10px;
+			width:100px;
+			height: 40px;
+		}
+	</style>
+</head>
+<body>
+	<div id="box"></div>
+	<button onclick="changeBig()">变大</button>
+	<button onclick="changeSmall()">变小</button>
+
+	<script>
+		
+
+		var box = document.getElementById("box");
+		var i = 300;
+		box.style.width = i +"px";
+		box.style.height = i +"px";
+		
+		function changeBig() {
+			i += 25;
+			box.style.width = i+"px";
+			box.style.height = i+"px";
+		}
+		function changeSmall() {
+			i -= 25;
+			box.style.width = i+"px";
+			box.style.height = i+"px";
+		}
+	</script>
+</body>
+</html>

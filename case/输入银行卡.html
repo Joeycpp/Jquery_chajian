@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		input{
+			width:300px;
+			padding:10px;
+			font-size:16px;
+			line-height: 18px;
+			border:1px solid #ccc;
+		}
+	</style>
+</head>
+<body>
+	<h1>请输入银行卡号</h1>
+	<hr>
+
+	<input type="text" id="bank_number" oninput="checkBankNumber(this)" maxlength="23">
+
+	<script>
+
+		function checkBankNumber(ob){
+			ob.value = ob.value.replace(/\D/g, "").replace(/(\d{4})(?=\d)/g, "$1 ");
+		}
+	</script>
+
+
+
+</body>
+</html>
